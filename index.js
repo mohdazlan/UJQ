@@ -1,7 +1,5 @@
 const express = require('express');
 const favicon = require('serve-favicon');
-const mongoose = require('mongoose');
-const fs = require('fs');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
@@ -20,5 +18,5 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 
 app.listen(process.env.PORT || fixedPORT, () => {
-    console.log(`listening to port ${process.env.PORT}`);
-  });
+  console.log(`listening to port ${process.env.PORT}`);
+});
