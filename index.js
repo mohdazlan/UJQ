@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: '.env' });
+}
+
 const express = require('express');
 const favicon = require('serve-favicon');
 const path = require('path');
@@ -9,6 +13,7 @@ const app = express();
 const fixedPORT = 4000;
 
 // importing routes or hooking routes woth the application
+const mongoose = require('mongoose');
 const indexRouter = require('./routes/index.route');
 const documentRouter = require('./routes/document.route');
 const officerRouter = require('./routes/officer.route');
@@ -22,6 +27,11 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.error('Connected to Mongoose'));
 
 app.use('/', indexRouter);
 app.use('/document', documentRouter);
