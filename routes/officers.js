@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+const Officer = require('../models/officer.model');
 
 // All officer route
 router.get('/', (req, res) => {
@@ -8,7 +9,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.render('officers/new');
+  // this officer variable will hold the Officer model
+  res.render('officers/new', { officer: new Officer() });
 });
 
 router.post('/new', (req, res) => {
