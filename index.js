@@ -14,9 +14,9 @@ const fixedPORT = 4000;
 
 // importing routes or hooking routes woth the application
 const mongoose = require('mongoose');
-const indexRouter = require('./routes/index.route');
-const documentRouter = require('./routes/document.route');
-const officerRouter = require('./routes/officer.route');
+const indexRouter = require('./routes/index');
+const documentRouter = require('./routes/documents');
+const officerRouter = require('./routes/officers');
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
@@ -34,8 +34,8 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.error('Connected to Mongoose'));
 
 app.use('/', indexRouter);
-app.use('/document', documentRouter);
-app.use('/officer', officerRouter);
+app.use('/documents', documentRouter);
+app.use('/officers', officerRouter);
 
 app.listen(process.env.PORT || fixedPORT, () => {
   console.log(`listening to port ${process.env.PORT}`);
