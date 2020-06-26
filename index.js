@@ -25,7 +25,7 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 // this is for public folder on path /
 app.use(express.static('public'));
-
+app.use(bodyParser.urlencoded({limit:'10mb',extended:false}));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });

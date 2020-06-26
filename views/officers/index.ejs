@@ -1,1 +1,9 @@
-All Officers
+<h2>Search Officers</h2>
+<form action="/officers" method="GET">
+<label>Name</label>
+<input type="text" name="name" value="<%= searchOptions.name %>">
+<button type="button">Search</button>
+</form>
+<% officers.forEach(officer => { %>
+    <div><%= officer.name %></div>
+<% }) %>
