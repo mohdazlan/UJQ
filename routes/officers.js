@@ -5,16 +5,22 @@ const Officer = require('../models/officer.model');
 
 // All officer route
 router.get('/', async (req, res) => {
-  const searchOptions = {};
-  if (req.query.name != null && req.query.name !== '') {
-    searchOptions.name = new RegExp(req.query.name, 'i');
-  }
-  try {
-    const officers = await Officer.find({ searchOptions });
-    res.render('officers/index', {
-      officers,
-      searchOptions: req.query,
-    });
+//  const searchOptions = {};
+//  if (req.query.name != null && req.query.name !== '') {
+//    searchOptions.name = new RegExp(req.query.name, 'i');
+//  }
+//  try {
+//    const officers = await Officer.find({ searchOptions });
+//    res.render('officers/index', {
+//      officers,
+//      searchOptions: req.query,
+//    });
+//  } catch (error) {
+//    res.redirect('/');
+//  }
+    try {
+    const officers = await Officer.find({});
+    res.render('officers/index', { officers });
   } catch (error) {
     res.redirect('/');
   }
