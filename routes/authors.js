@@ -5,18 +5,20 @@ const router = express.Router();
 // All Authors Route
 router.get('/', async (req, res) => {
   // res.send('Hello World');
+  const searchOptions = {};
+  if (req.query.name != null && req.query.name !== '') {
+    searchOptions.name = new RegExp(req.query.name, 'i');
+  }
   try {
-    const authors = await Author.find({});
-    res.render('authors/index', { authors });
+    const authors = await Author.find( searchOptions );
+    res.render('authors/index', {
+      authors:authors,
+      searchOptions: req.query,
+    });
   } catch (error) {
     res.redirect('/');
   }
 });
-
-router.get('/new', (req, res) => {
-  res.render('authors/new', { author: new Author() });
-});
-// author var will be available to our ejs file
 
 router.post('/', async (req, res) => {
   const author = new Author({
@@ -31,6 +33,13 @@ router.post('/', async (req, res) => {
     });
   }
 });
+
+router.get('/new', (req, res) => {
+  res.render('authors/new', { author: new Author() });
+});
+// author var will be available to our ejs file
+
+
 
 // router.post('/', (req, res) => {
 //   const author = new Author({
