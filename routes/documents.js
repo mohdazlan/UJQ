@@ -3,9 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 const Document = require('../models/document.model');
+const Author = require('../models/author.model');
 
-router.get('/', (req, res) => {
-  res.send('Hello World');
+// All Document Route
+router.get('/', async (req, res) => {
+  res.send('All books');
 });
 
 router.post('/', async (req, res) => {
@@ -22,4 +24,20 @@ router.post('/', async (req, res) => {
     });
   }
 });
+
+// New Document Route
+router.get('/new', async (req, res) => {
+  try {
+    const authors = await Author.find({});
+    const document = new Document();
+    res.render('documents/new', {
+      // we are going to pass two vars that we created above
+      authors,
+      document,
+    });
+  } catch (error) {
+    res.redirect('/documents');
+  }
+});
+
 module.exports = router;
