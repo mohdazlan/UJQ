@@ -3,13 +3,13 @@ const multer = require('multer');
 
 const router = express.Router();
 const path = require('path');
-
+const fs = require('fs');
 const Document = require('../models/document.model');
 const Author = require('../models/author.model');
 
 const uploadPath = path.join('public', Document.coverImageBasePath);
 
-const imageMimeTypes = ['images/jpeg', 'images/png'];
+const imageMimeTypes = ['image/jpeg', 'image/png'];
 
 const upload = multer({
   dest: uploadPath,
@@ -35,7 +35,7 @@ async function renderNewPage(res, document, hasError = false) {
 
 // All Document Route
 router.get('/', async (req, res) => {
-  res.send('All books');
+  res.send('All Documents');
 });
 
 // New Document Route

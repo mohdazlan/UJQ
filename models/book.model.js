@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const path = require('path');
 // this will be in public folder
 const coverImageBasePath = 'uploads/bookCovers';
 
@@ -24,15 +24,20 @@ const bookSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  // coverImageName: {
-  //   type: String,
-  //   required: true,
-  // },
+  coverImageName: {
+    type: String,
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Author',
   },
+});
+
+bookSchema.virtual('coverImagePath').get(function () {
+  if (this.coverImageName != null) {
+    return path.join('/', coverImageBasePath, this.coverImageName);
+  }
 });
 
 // 'Officer will be the name of the table in my database
