@@ -13,8 +13,7 @@ const app = express();
 const fixedPORT = 4000;
 
 // importing routes or hooking routes woth the application
-const mongoose = require('mongoose');
-const morgan = require('morgan');
+const mongoose = require('mongoose'); 
 const indexRouter = require('./routes/index');
 const authorRouter = require('./routes/authors');
 const bookRouter = require('./routes/books');
@@ -24,8 +23,7 @@ const fs = require('fs');
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
 app.set('layout', 'layouts/layout');
-
-app.use(morgan('dev'));
+ 
 app.use(expressLayouts);
 // this is for public folder on path /
 app.use(express.static('public'));
